@@ -21,8 +21,8 @@ valid_login = os.getenv('LOGIN')
 valid_password = os.getenv('PASSWORD')
 invalid_ls = '317722094378'
 
-valid_email = 'ndummf9@icznn.com'
-valid_pass_reg = 'jCgoDQdi_0'
+valid_email = 'hkg7ix@icznn.com'
+valid_pass_reg = '#1Ejzkwb+N'
 
 
 def generate_string_ru(n):

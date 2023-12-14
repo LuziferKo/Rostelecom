@@ -8,7 +8,6 @@ from pages.settings import valid_phone, valid_email, valid_login, invalid_ls, va
 
 @pytest.mark.auth
 @pytest.mark.positive
-@pytest.mark.xfail
 @pytest.mark.parametrize('username', [valid_phone, valid_email, valid_login, invalid_ls],
                          ids=['phone', 'email', 'login', 'ls'])
 def test_active_tab(browser, username):
@@ -34,6 +33,7 @@ def test_auth_with_valid_email(browser):
     page = AuthPage(browser)
     page.enter_username(valid_email)
     page.enter_password(valid_pass_reg)
+    time.sleep(30)  # Время для ввода капчи в случае её появления
     page.btn_click_enter()
     page.driver.save_screenshot('auth_with_email.png')
 
@@ -49,7 +49,7 @@ def test_auth_with_valid_email(browser):
                          ids=['valid phone', 'valid login'])
 def test_auth_with_valid_login(browser, username):
     """Проверка авторизации по номеру телефона и паролю, проверка автоматического переключения табов телефон/логин
-    (для проверки требуется зарегистрированный номер телефона"""
+    (для проверки требуется зарегистрированный номер телефона и существующий логин)"""
     page = AuthPage(browser)
     page.enter_username(username)
     page.enter_password(valid_password)

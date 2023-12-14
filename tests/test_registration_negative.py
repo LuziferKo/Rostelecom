@@ -4,7 +4,6 @@ from pages.settings import *
 from pages.auth import *
 
 
-
 @pytest.mark.reg
 @pytest.mark.negative
 @pytest.mark.parametrize('firstname', ['', generate_string_ru(1), generate_string_ru(31), generate_string_ru(256),
@@ -90,7 +89,7 @@ def test_registration_with_invalid_phone_format(browser, phone):
     page.btn_click()
 
     error_message = browser.find_element(*AuthLocators.AUTH_MESS_ERROR)
-    assert error_message.text == 'Введите телефон в формате +7ХХХХХХХХХХ или +375ХХХХХХХХХ, ' \
+    assert error_message.text == 'Введите телефон в формате +7ХХХХХХХХХХ или +375XXXXXXXXX, ' \
                                  'или email в формате example@email.ru'
 
 
@@ -99,7 +98,7 @@ def test_registration_with_invalid_phone_format(browser, phone):
 @pytest.mark.parametrize('email', ['', '@', '@.', '.', generate_string_ru(20), f'{rus_chars()}@mail.ru',
                                    f'{chinese_chars()}@mail.ru', 1234567],
                          ids=['empty', 'at', 'at dot', 'dot', 'string', 'russian', 'chinese', 'numbers'])
-def test_regastration_with_invalid_email_format(browser, email):
+def test_registration_with_invalid_email_format(browser, email):
     """Невалидный формат электронной почты"""
     page = AuthPage(browser)
     page.enter_reg_page()
@@ -120,7 +119,7 @@ def test_regastration_with_invalid_email_format(browser, email):
     page.btn_click()
 
     error_message = browser.find_element(*AuthLocators.AUTH_MESS_ERROR)
-    assert error_message.text == 'Введите телефон в формате +7ХХХХХХХХХХ или +375ХХХХХХХХХ, ' \
+    assert error_message.text == 'Введите телефон в формате +7ХХХХХХХХХХ или +375XXXXXXXXX, ' \
                                  'или email в формате example@email.ru'
 
 
